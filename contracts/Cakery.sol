@@ -9,6 +9,7 @@ import "./Cakery_Rep_Members.sol";
 
 import "./Cakery_Rep_Proposals.sol";
 import "./Cakery_Rep_Votes.sol";
+// import "./Cakery_Rep_Potents.sol";
 
 contract Cakery {
     Cakery_Rep_Orgs _org = new Cakery_Rep_Orgs();
@@ -16,6 +17,7 @@ contract Cakery {
 
     Cakery_Rep_Proposals _proposal = new Cakery_Rep_Proposals();
     Cakery_Rep_Votes _vote = new Cakery_Rep_Votes();
+    // Cakery_Rep_Potents _potent = new Cakery_Rep_Potents();
 
     Cakery_Entities _utils = new Cakery_Entities();
 
@@ -49,32 +51,40 @@ contract Cakery {
         bytes32 memberKey,
         string memory memberName
     ) public {
-        if (!_member.exists(memberKey)) {
-            _member.newMember(memberKey, memberName, false, 20);
-            _org.memberAdd(orgKey, memberKey);
 
-            if (!_proposal.exists(memberKey)) {
-                // new members need approval.  Create the proposal for voting.
-                bytes32 proposalKey = memberKey;
-                uint16 votesRequired = _org.getVotesRequired(orgKey);
-                _proposal.newProposal(
-                    proposalKey,
-                    orgKey,
-                    memberKey,
-                    memberName,
-                    "",
-                    "",
-                    "",
-                    0,
-                    votesRequired,
-                    Cakery_Entities.ProposalType.NEW_MEMBER
-                );
-                _org.proposalAdd(orgKey, proposalKey);
-                bytes32 voteKey = memberKey;
-                //bytes32 voteKey = bytes32(sha256(abi.encodePacked(memberKey,proposalKey)));
-                _vote.newVote(voteKey, proposalKey, memberKey, true);
-            }
+        //require(!_member.exists(memberKey), "Can't add new member when already exists.");
+        if (!_member.exists(memberKey))
+        {
+            _member.newMember(memberKey, memberName, false, 1);
         }
+        _org.memberAdd(orgKey, memberKey);
+
+        // proposal to join the org
+        bytes32 proposalHash = keccak256(abi.encodePacked(orgKey, memberKey));
+
+        if (!_proposal.exists(proposalHash))
+        {
+            // new members need approval.  Create the proposal for voting.
+            //bytes32 proposalKey = proposalHash;
+            uint16 votesRequired = _org.getVotesRequired(orgKey);
+            _proposal.newProposal(
+                proposalHash, //proposalKey,
+                orgKey,
+                memberKey,
+                memberName,
+                "",
+                "",
+                "",
+                0,
+                votesRequired,
+                Cakery_Entities.ProposalType.NEW_MEMBER
+            );
+            _org.proposalAdd(orgKey, proposalHash);
+            bytes32 voteKey = memberKey; // in the proposal, the first vote is by the creator (unique)
+            //bytes32 voteKey = proposalHash; // bytes32(sha256(abi.encodePacked(memberKey, proposalHash)));
+            _vote.newVote(voteKey, proposalHash, memberKey, true);
+        }
+
     }
 
     function getOrg(bytes32 orgKey)
@@ -137,7 +147,59 @@ contract Cakery {
         );
     }
 
-    // Hard hat testing viewing only - won't return on TRON
+    // private function
+    // function createPotentProposalOrg(bytes32 proposalKey, bytes32 orgKey) public returns (uint256 totalSum) {
+    //     // All proposals of Org
+    //     bytes32[] memory array = _org.getOrgProposals(orgKey);
+    //     Cakery_Entities.ProposalReturn[] memory pData = new Cakery_Entities.ProposalReturn[](array.length);
+    //     //uint256 totalSum = 0;
+
+    //     bytes32[] memory potentKeys  = new bytes32[](array.length);
+
+    //     for (uint16 i = 0; i < array.length; i++) {
+    //         pData[i] = _proposal.getProposal(array[i]); //pData[i].proposalKey = array[i];
+
+    //         if (pData[i].decision == Cakery_Entities.DecisionStatus.APPROVED)
+    //         {
+    //             bytes32 potentKey = keccak256(abi.encodePacked(proposalKey, pData[i].memberKey));
+    //             // update expected. Create if not found
+
+    //             potentKeys[i]= potentKey;
+
+    //             totalSum = totalSum +  pData[i].total;
+    //             bool isNew = _potent.updatePotentPower(
+    //                 potentKey,
+    //                 proposalKey,
+    //                 pData[i].memberKey,
+    //                 pData[i].total
+    //             );
+    //             if (!isNew) potentKeys[i] = 0x0;
+    //         }
+    //     }
+    //     // iterate the list and get percent
+
+    //     if (totalSum > 0)
+    //     {
+    //         uint256 percent1_x_1000 = (100 / totalSum) * 1000; // keep 3 decimals
+
+    //         for (uint16 i = 0; i < potentKeys.length; i++) {
+    //             if (potentKeys[i] != 0x0)
+    //             {
+    //                 Cakery_Entities.PotentStruct memory assess = _potent.getPotent(potentKeys[i]);
+    //                 uint256 ratio = (totalSum / assess.power);
+    //                 uint16 percent = uint16( (100 / ratio) * percent1_x_1000 );
+
+    //                 _potent.updatePotentPercent(potentKeys[i], percent);
+    //             }
+    //             // we've a list of each members vote potency for this proposal
+    //         }
+    //     }
+    //     // Voting should check the Potency and attach it the resulting vote
+
+    //     return totalSum;
+    // }
+
+    // won't return on earlier versions of solidity
     function getProposalsOfOrgData(bytes32 orgKey) public view returns (Cakery_Entities.ProposalReturn[] memory) {
         bytes32[] memory array = _org.getOrgProposals(orgKey);
         Cakery_Entities.ProposalReturn[] memory pData = new Cakery_Entities.ProposalReturn[](array.length);
@@ -148,7 +210,7 @@ contract Cakery {
         return pData;
     }
 
-    // Hard hat testing only - won't return on TRON
+    // won't return on earlier versions of solidity
     function getVotesOfProposalData(bytes32 proposalKey) public view returns (Cakery_Entities.VoteStruct[] memory) {
         bytes32[] memory array = _proposal.getProposalVotes(proposalKey);
         // array of members who have voted
@@ -250,7 +312,8 @@ contract Cakery {
 
             if (action == Cakery_Entities.ProposalType.NEW_MEMBER) // 'updateMemberAsApproved'
             {
-                bytes32 approveMember = proposalKey;
+                Cakery_Entities.ProposalReturn memory p = _proposal.getProposal(proposalKey);
+                bytes32 approveMember = p.memberKey;
                 _org.memberApproved(orgKey, approveMember);
             } else if (action == Cakery_Entities.ProposalType.ORG_RULES) // 'updateMemberVoteRules'
             {

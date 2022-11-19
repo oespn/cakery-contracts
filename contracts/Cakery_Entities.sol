@@ -72,6 +72,13 @@ contract Cakery_Entities {
         bool voteFor; // or Against == false
     }
 
+    struct PotentStruct {
+        bytes32 proposalKey;
+        bytes32 memberKey;
+        uint256 power; // Total DOU at time of vote
+        uint16 percent;
+    }
+
     // key: mapping(bytes32 => VoteStruct) votes;
 
     /// Explicit return models for external use

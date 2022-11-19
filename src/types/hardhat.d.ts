@@ -21,6 +21,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Cakery_Rep_Orgs__factory>;
     getContractFactory(
+      name: "Cakery_Rep_Potents",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Cakery_Rep_Potents__factory>;
+    getContractFactory(
       name: "Cakery_Rep_Proposals",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Cakery_Rep_Proposals__factory>;
@@ -55,6 +59,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Cakery_Rep_Orgs>;
+    getContractAt(
+      name: "Cakery_Rep_Potents",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Cakery_Rep_Potents>;
     getContractAt(
       name: "Cakery_Rep_Proposals",
       address: string,

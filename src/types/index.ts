@@ -4,6 +4,7 @@
 export type { Cakery } from "./Cakery";
 export type { Cakery_Rep_Members } from "./Cakery_Rep_Members";
 export type { Cakery_Rep_Orgs } from "./Cakery_Rep_Orgs";
+export type { Cakery_Rep_Potents } from "./Cakery_Rep_Potents";
 export type { Cakery_Rep_Proposals } from "./Cakery_Rep_Proposals";
 export type { Cakery_Rep_Votes } from "./Cakery_Rep_Votes";
 export type { Greeter } from "./Greeter";
@@ -12,6 +13,7 @@ export type { Migrations } from "./Migrations";
 export * as factories from "./factories";
 export { Cakery_Rep_Members__factory } from "./factories/Cakery_Rep_Members__factory";
 export { Cakery_Rep_Orgs__factory } from "./factories/Cakery_Rep_Orgs__factory";
+export { Cakery_Rep_Potents__factory } from "./factories/Cakery_Rep_Potents__factory";
 export { Cakery_Rep_Proposals__factory } from "./factories/Cakery_Rep_Proposals__factory";
 export { Cakery_Rep_Votes__factory } from "./factories/Cakery_Rep_Votes__factory";
 export { Cakery__factory } from "./factories/Cakery__factory";

@@ -4,6 +4,7 @@
 export { Cakery__factory } from "./Cakery__factory";
 export { Cakery_Rep_Members__factory } from "./Cakery_Rep_Members__factory";
 export { Cakery_Rep_Orgs__factory } from "./Cakery_Rep_Orgs__factory";
+export { Cakery_Rep_Potents__factory } from "./Cakery_Rep_Potents__factory";
 export { Cakery_Rep_Proposals__factory } from "./Cakery_Rep_Proposals__factory";
 export { Cakery_Rep_Votes__factory } from "./Cakery_Rep_Votes__factory";
 export { Greeter__factory } from "./Greeter__factory";

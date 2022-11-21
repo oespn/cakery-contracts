@@ -1,5 +1,25 @@
+### Overview
+
+Smart Contract functions:
+
+![run a DAO with On chain governance without token](
+https://res.cloudinary.com/devpost/image/fetch/s--vU4BFFGE--/c_limit,f_auto,fl_lossy,q_auto:eco,w_900/https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/001/927/638/datas/original.jpg)
+
 
 ### Test cases in Hardhat
+
+```sh
+$ yarn test
+```
+
+
+
+## Deploy to Aurora Testnet
+
+```sh
+$ yarn deploy-cakery
+```
+
 
 ## Library Credits
 
@@ -122,10 +142,6 @@ make your `ethers` package version match the version used by the `@ethereum-waff
 [#111](https://github.com/paulrberg/solidity-template/issues/111) for more details.
 
 
-## Deploy to Aurora
 
-```sh
-$ yarn deploy-cakery
-```
 
 

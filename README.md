@@ -1,6 +1,16 @@
 ### Overview
 
-Smart Contract functions:
+Smart Contracts:
+
+- Solidity (EVM Compatible) - Secure, type-safe and readable
+- Event emitting - For integration with GraphQL (tracing / audit capable)
+- Simple extensible model based on: Proposal -> transaction lifecycle through voting which can be easily adapted to various types of work associated with an organisation.
+- Inbuilt consensus rules and the ability to update though a proposal and voting.
+- External ID fields to assist integration with external databases.
+- On-chain data maintained to only the critical elements and references necessary for on chain actions.
+- Blob link (immutable IPFS storage) to encode references to large data PDF for invoices, proposal docs etc
+
+Functions:
 
 ![run a DAO with On chain governance without token](
 https://res.cloudinary.com/devpost/image/fetch/s--vU4BFFGE--/c_limit,f_auto,fl_lossy,q_auto:eco,w_900/https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/001/927/638/datas/original.jpg)

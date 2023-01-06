@@ -10,7 +10,11 @@ import type {
   OnEvent,
   PromiseOrValue,
 } from "./common";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   BaseContract,
@@ -81,42 +85,124 @@ export declare namespace Cakery_Entities {
 
 export interface CakeryInterface extends utils.Interface {
   functions: {
+    "addressToBytes32(address)": FunctionFragment;
     "castVote(bytes32,bytes32,bytes32,bool)": FunctionFragment;
     "castVoteAsMember(bytes32,bytes32,bytes32,bytes32,bool)": FunctionFragment;
     "createClaim(bytes32,bytes32,string,string,string,string,uint256)": FunctionFragment;
     "createOrg(bytes32,string,string,string)": FunctionFragment;
+    "existsMember(bytes32)": FunctionFragment;
+    "existsOrg(bytes32)": FunctionFragment;
+    "existsProposal(bytes32)": FunctionFragment;
+    "existsVote(bytes32)": FunctionFragment;
     "getApprovedMembersOfOrg(bytes32)": FunctionFragment;
+    "getMember(bytes32)": FunctionFragment;
+    "getMemberAtIndex(uint256)": FunctionFragment;
+    "getMemberCount()": FunctionFragment;
     "getMembersOfOrg(bytes32)": FunctionFragment;
     "getOrg(bytes32)": FunctionFragment;
+    "getOrgApprovedMembers(bytes32)": FunctionFragment;
+    "getOrgAtIndex(uint256)": FunctionFragment;
+    "getOrgCount()": FunctionFragment;
+    "getOrgMembers(bytes32)": FunctionFragment;
+    "getOrgProposals(bytes32)": FunctionFragment;
+    "getOrg_(bytes32)": FunctionFragment;
     "getProposal(bytes32)": FunctionFragment;
+    "getProposalAtIndex(uint256)": FunctionFragment;
+    "getProposalCount()": FunctionFragment;
+    "getProposalVotes(bytes32)": FunctionFragment;
+    "getProposal_(bytes32)": FunctionFragment;
     "getProposalsOfOrg(bytes32)": FunctionFragment;
     "getProposalsOfOrgData(bytes32)": FunctionFragment;
     "getVote(bytes32)": FunctionFragment;
+    "getVoteAtIndex(uint256)": FunctionFragment;
+    "getVoteCount()": FunctionFragment;
+    "getVote_(bytes32)": FunctionFragment;
     "getVotes(bytes32)": FunctionFragment;
+    "getVotesCount(bytes32)": FunctionFragment;
     "getVotesOfProposalData(bytes32)": FunctionFragment;
+    "getVotesRequired(bytes32)": FunctionFragment;
+    "memberAdd(bytes32,bytes32)": FunctionFragment;
+    "memberApproved(bytes32,bytes32)": FunctionFragment;
+    "memberApprovedExists(bytes32,bytes32)": FunctionFragment;
+    "memberExists(bytes32,bytes32)": FunctionFragment;
+    "newMember(bytes32,string,bool,uint256)": FunctionFragment;
+    "newOrg(bytes32,string,string,bytes32)": FunctionFragment;
+    "newProposal(bytes32,bytes32,bytes32,string,string,string,string,uint256,uint16,uint8)": FunctionFragment;
+    "newVote(bytes32,bytes32,bytes32,bool)": FunctionFragment;
+    "proposalAdd(bytes32,bytes32)": FunctionFragment;
+    "remMember(bytes32)": FunctionFragment;
+    "remOrg(bytes32)": FunctionFragment;
+    "remProposal(bytes32)": FunctionFragment;
+    "setVotesRequired(bytes32,uint16)": FunctionFragment;
     "simpleAddMe(bytes32,string)": FunctionFragment;
     "simpleAddMember(bytes32,bytes32,string)": FunctionFragment;
+    "updateMember(bytes32,string,bool,uint256)": FunctionFragment;
+    "updateOrg(bytes32,string,string,bytes32,uint16,uint16)": FunctionFragment;
+    "voteAdd(bytes32,bytes32,bytes32,bool)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "addressToBytes32"
       | "castVote"
       | "castVoteAsMember"
       | "createClaim"
       | "createOrg"
+      | "existsMember"
+      | "existsOrg"
+      | "existsProposal"
+      | "existsVote"
       | "getApprovedMembersOfOrg"
+      | "getMember"
+      | "getMemberAtIndex"
+      | "getMemberCount"
       | "getMembersOfOrg"
       | "getOrg"
+      | "getOrgApprovedMembers"
+      | "getOrgAtIndex"
+      | "getOrgCount"
+      | "getOrgMembers"
+      | "getOrgProposals"
+      | "getOrg_"
       | "getProposal"
+      | "getProposalAtIndex"
+      | "getProposalCount"
+      | "getProposalVotes"
+      | "getProposal_"
       | "getProposalsOfOrg"
       | "getProposalsOfOrgData"
       | "getVote"
+      | "getVoteAtIndex"
+      | "getVoteCount"
+      | "getVote_"
       | "getVotes"
+      | "getVotesCount"
       | "getVotesOfProposalData"
+      | "getVotesRequired"
+      | "memberAdd"
+      | "memberApproved"
+      | "memberApprovedExists"
+      | "memberExists"
+      | "newMember"
+      | "newOrg"
+      | "newProposal"
+      | "newVote"
+      | "proposalAdd"
+      | "remMember"
+      | "remOrg"
+      | "remProposal"
+      | "setVotesRequired"
       | "simpleAddMe"
       | "simpleAddMember"
+      | "updateMember"
+      | "updateOrg"
+      | "voteAdd"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "addressToBytes32",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "castVote",
     values: [
@@ -158,8 +244,36 @@ export interface CakeryInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "existsMember",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "existsOrg",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "existsProposal",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "existsVote",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getApprovedMembersOfOrg",
     values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMember",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMemberAtIndex",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMemberCount",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getMembersOfOrg",
@@ -170,7 +284,47 @@ export interface CakeryInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
+    functionFragment: "getOrgApprovedMembers",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOrgAtIndex",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOrgCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOrgMembers",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOrgProposals",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOrg_",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getProposal",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getProposalAtIndex",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getProposalCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getProposalVotes",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getProposal_",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -186,12 +340,110 @@ export interface CakeryInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
+    functionFragment: "getVoteAtIndex",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getVoteCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getVote_",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getVotes",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getVotesCount",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "getVotesOfProposalData",
     values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getVotesRequired",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "memberAdd",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "memberApproved",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "memberApprovedExists",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "memberExists",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "newMember",
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "newOrg",
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "newProposal",
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "newVote",
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<boolean>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "proposalAdd",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "remMember",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "remOrg",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "remProposal",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setVotesRequired",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "simpleAddMe",
@@ -205,7 +457,40 @@ export interface CakeryInterface extends utils.Interface {
       PromiseOrValue<string>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "updateMember",
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateOrg",
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "voteAdd",
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<boolean>
+    ]
+  ): string;
 
+  decodeFunctionResult(
+    functionFragment: "addressToBytes32",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "castVote", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "castVoteAsMember",
@@ -217,7 +502,26 @@ export interface CakeryInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "createOrg", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "existsMember",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "existsOrg", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "existsProposal",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "existsVote", data: BytesLike): Result;
+  decodeFunctionResult(
     functionFragment: "getApprovedMembersOfOrg",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getMember", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getMemberAtIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getMemberCount",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -226,7 +530,44 @@ export interface CakeryInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "getOrg", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "getOrgApprovedMembers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getOrgAtIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getOrgCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getOrgMembers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getOrgProposals",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getOrg_", data: BytesLike): Result;
+  decodeFunctionResult(
     functionFragment: "getProposal",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getProposalAtIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getProposalCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getProposalVotes",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getProposal_",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -238,9 +579,60 @@ export interface CakeryInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getVote", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getVoteAtIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getVoteCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getVote_", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getVotes", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "getVotesCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getVotesOfProposalData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getVotesRequired",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "memberAdd", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "memberApproved",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "memberApprovedExists",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "memberExists",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "newMember", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "newOrg", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "newProposal",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "newVote", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "proposalAdd",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "remMember", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "remOrg", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "remProposal",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setVotesRequired",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -251,9 +643,208 @@ export interface CakeryInterface extends utils.Interface {
     functionFragment: "simpleAddMember",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateMember",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "updateOrg", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "voteAdd", data: BytesLike): Result;
 
-  events: {};
+  events: {
+    "LogNewMember(address,bytes32,string,bool,uint256)": EventFragment;
+    "LogNewOrg(address,bytes32,string,string,bytes32,uint16,uint16)": EventFragment;
+    "LogNewProposal(address,bytes32,string,string,string,string,uint256,uint16,uint16,uint16,uint8)": EventFragment;
+    "LogNewVote(address,bytes32,bool)": EventFragment;
+    "LogRemMember(address,bytes32)": EventFragment;
+    "LogRemOrg(address,bytes32)": EventFragment;
+    "LogRemProposal(address,bytes32)": EventFragment;
+    "LogUpdateMember(address,bytes32,string,bool,uint256)": EventFragment;
+    "LogUpdateOrg(address,bytes32,string,string,bytes32,uint16,uint16,uint32,uint16)": EventFragment;
+    "LogUpdateProposal(address,bytes32,string,string,string,string,uint256,uint16,uint16,uint16,uint8,uint8)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "LogNewMember"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogNewOrg"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogNewProposal"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogNewVote"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogRemMember"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogRemOrg"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogRemProposal"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogUpdateMember"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogUpdateOrg"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LogUpdateProposal"): EventFragment;
 }
+
+export interface LogNewMemberEventObject {
+  sender: string;
+  key: string;
+  name: string;
+  delux: boolean;
+  price: BigNumber;
+}
+export type LogNewMemberEvent = TypedEvent<
+  [string, string, string, boolean, BigNumber],
+  LogNewMemberEventObject
+>;
+
+export type LogNewMemberEventFilter = TypedEventFilter<LogNewMemberEvent>;
+
+export interface LogNewOrgEventObject {
+  sender: string;
+  key: string;
+  name: string;
+  ref: string;
+  memberKey: string;
+  members: number;
+  voteForRequired: number;
+}
+export type LogNewOrgEvent = TypedEvent<
+  [string, string, string, string, string, number, number],
+  LogNewOrgEventObject
+>;
+
+export type LogNewOrgEventFilter = TypedEventFilter<LogNewOrgEvent>;
+
+export interface LogNewProposalEventObject {
+  sender: string;
+  key: string;
+  name: string;
+  uuid: string;
+  doc_cid: string;
+  ref_id: string;
+  total: BigNumber;
+  nVotes: number;
+  nVotesFor: number;
+  nVotesRequired: number;
+  proposalType: number;
+}
+export type LogNewProposalEvent = TypedEvent<
+  [
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    number,
+    number,
+    number,
+    number
+  ],
+  LogNewProposalEventObject
+>;
+
+export type LogNewProposalEventFilter = TypedEventFilter<LogNewProposalEvent>;
+
+export interface LogNewVoteEventObject {
+  sender: string;
+  proposalKey: string;
+  voteFor: boolean;
+}
+export type LogNewVoteEvent = TypedEvent<
+  [string, string, boolean],
+  LogNewVoteEventObject
+>;
+
+export type LogNewVoteEventFilter = TypedEventFilter<LogNewVoteEvent>;
+
+export interface LogRemMemberEventObject {
+  sender: string;
+  key: string;
+}
+export type LogRemMemberEvent = TypedEvent<
+  [string, string],
+  LogRemMemberEventObject
+>;
+
+export type LogRemMemberEventFilter = TypedEventFilter<LogRemMemberEvent>;
+
+export interface LogRemOrgEventObject {
+  sender: string;
+  key: string;
+}
+export type LogRemOrgEvent = TypedEvent<[string, string], LogRemOrgEventObject>;
+
+export type LogRemOrgEventFilter = TypedEventFilter<LogRemOrgEvent>;
+
+export interface LogRemProposalEventObject {
+  sender: string;
+  key: string;
+}
+export type LogRemProposalEvent = TypedEvent<
+  [string, string],
+  LogRemProposalEventObject
+>;
+
+export type LogRemProposalEventFilter = TypedEventFilter<LogRemProposalEvent>;
+
+export interface LogUpdateMemberEventObject {
+  sender: string;
+  key: string;
+  name: string;
+  delux: boolean;
+  price: BigNumber;
+}
+export type LogUpdateMemberEvent = TypedEvent<
+  [string, string, string, boolean, BigNumber],
+  LogUpdateMemberEventObject
+>;
+
+export type LogUpdateMemberEventFilter = TypedEventFilter<LogUpdateMemberEvent>;
+
+export interface LogUpdateOrgEventObject {
+  sender: string;
+  key: string;
+  name: string;
+  ref: string;
+  memberKey: string;
+  members: number;
+  membersApproved: number;
+  proposals: number;
+  voteForRequired: number;
+}
+export type LogUpdateOrgEvent = TypedEvent<
+  [string, string, string, string, string, number, number, number, number],
+  LogUpdateOrgEventObject
+>;
+
+export type LogUpdateOrgEventFilter = TypedEventFilter<LogUpdateOrgEvent>;
+
+export interface LogUpdateProposalEventObject {
+  sender: string;
+  key: string;
+  name: string;
+  uuid: string;
+  doc_cid: string;
+  ref_id: string;
+  total: BigNumber;
+  nVotes: number;
+  nVotesFor: number;
+  nVotesRequired: number;
+  proposalType: number;
+  decisionStatus: number;
+}
+export type LogUpdateProposalEvent = TypedEvent<
+  [
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    number,
+    number,
+    number,
+    number,
+    number
+  ],
+  LogUpdateProposalEventObject
+>;
+
+export type LogUpdateProposalEventFilter =
+  TypedEventFilter<LogUpdateProposalEvent>;
 
 export interface Cakery extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -282,6 +873,11 @@ export interface Cakery extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    addressToBytes32(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { key: string }>;
+
     castVote(
       orgKey: PromiseOrValue<BytesLike>,
       voteKey: PromiseOrValue<BytesLike>,
@@ -318,10 +914,50 @@ export interface Cakery extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    existsMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    existsOrg(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    existsProposal(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    existsVote(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     getApprovedMembersOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string[]] & { array: string[] }>;
+
+    getMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, boolean, BigNumber] & {
+        name: string;
+        delux: boolean;
+        price: BigNumber;
+      }
+    >;
+
+    getMemberAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { key: string }>;
+
+    getMemberCount(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { count: BigNumber }>;
 
     getMembersOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
@@ -337,6 +973,43 @@ export interface Cakery extends BaseContract {
         ref: string;
         memberKey: string;
         members: number;
+        voteForRequired: number;
+      }
+    >;
+
+    getOrgApprovedMembers(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { array: string[] }>;
+
+    getOrgAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { key: string }>;
+
+    getOrgCount(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { count: BigNumber }>;
+
+    getOrgMembers(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { array: string[] }>;
+
+    getOrgProposals(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { array: string[] }>;
+
+    getOrg_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, number, number] & {
+        name: string;
+        ref: string;
+        memberKey: string;
+        nMembers: number;
         voteForRequired: number;
       }
     >;
@@ -370,6 +1043,29 @@ export interface Cakery extends BaseContract {
       }
     >;
 
+    getProposalAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { key: string }>;
+
+    getProposalCount(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { count: BigNumber }>;
+
+    getProposalVotes(
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { array: string[] }>;
+
+    getProposal_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [Cakery_Entities.ProposalReturnStructOutput] & {
+        r: Cakery_Entities.ProposalReturnStructOutput;
+      }
+    >;
+
     getProposalsOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -391,15 +1087,134 @@ export interface Cakery extends BaseContract {
       }
     >;
 
+    getVoteAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { key: string }>;
+
+    getVoteCount(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { count: BigNumber }>;
+
+    getVote_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[Cakery_Entities.VoteStructStructOutput]>;
+
     getVotes(
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string[]] & { array: string[] }>;
 
+    getVotesCount(
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [number, number, number] & {
+        votes: number;
+        votesFor: number;
+        votesRequired: number;
+      }
+    >;
+
     getVotesOfProposalData(
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[Cakery_Entities.VoteStructStructOutput[]]>;
+
+    getVotesRequired(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[number] & { votesRequired: number }>;
+
+    memberAdd(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    memberApproved(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    memberApprovedExists(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    memberExists(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    newMember(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      delux: PromiseOrValue<boolean>,
+      price: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    newOrg(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      ref: PromiseOrValue<string>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    newProposal(
+      key: PromiseOrValue<BytesLike>,
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      uuid: PromiseOrValue<string>,
+      doc_cid: PromiseOrValue<string>,
+      ref_id: PromiseOrValue<string>,
+      total: PromiseOrValue<BigNumberish>,
+      votesRequired: PromiseOrValue<BigNumberish>,
+      proposalType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    newVote(
+      key: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      voteFor: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    proposalAdd(
+      orgKey: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    remMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    remOrg(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    remProposal(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setVotesRequired(
+      orgKey: PromiseOrValue<BytesLike>,
+      votesRequired: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     simpleAddMe(
       orgKey: PromiseOrValue<BytesLike>,
@@ -413,7 +1228,38 @@ export interface Cakery extends BaseContract {
       memberName: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    updateMember(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      delux: PromiseOrValue<boolean>,
+      price: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    updateOrg(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      ref: PromiseOrValue<string>,
+      memberKey: PromiseOrValue<BytesLike>,
+      nMembers: PromiseOrValue<BigNumberish>,
+      voteForRequired: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    voteAdd(
+      voteKey: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      voteFor: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
+
+  addressToBytes32(
+    addr: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   castVote(
     orgKey: PromiseOrValue<BytesLike>,
@@ -451,10 +1297,48 @@ export interface Cakery extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  existsMember(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  existsOrg(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  existsProposal(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  existsVote(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   getApprovedMembersOfOrg(
     orgKey: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string[]>;
+
+  getMember(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, boolean, BigNumber] & {
+      name: string;
+      delux: boolean;
+      price: BigNumber;
+    }
+  >;
+
+  getMemberAtIndex(
+    index: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  getMemberCount(overrides?: CallOverrides): Promise<BigNumber>;
 
   getMembersOfOrg(
     orgKey: PromiseOrValue<BytesLike>,
@@ -470,6 +1354,41 @@ export interface Cakery extends BaseContract {
       ref: string;
       memberKey: string;
       members: number;
+      voteForRequired: number;
+    }
+  >;
+
+  getOrgApprovedMembers(
+    orgKey: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string[]>;
+
+  getOrgAtIndex(
+    index: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  getOrgCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getOrgMembers(
+    orgKey: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string[]>;
+
+  getOrgProposals(
+    orgKey: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string[]>;
+
+  getOrg_(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, number, number] & {
+      name: string;
+      ref: string;
+      memberKey: string;
+      nMembers: number;
       voteForRequired: number;
     }
   >;
@@ -503,6 +1422,23 @@ export interface Cakery extends BaseContract {
     }
   >;
 
+  getProposalAtIndex(
+    index: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  getProposalCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getProposalVotes(
+    proposalKey: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string[]>;
+
+  getProposal_(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<Cakery_Entities.ProposalReturnStructOutput>;
+
   getProposalsOfOrg(
     orgKey: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -524,15 +1460,132 @@ export interface Cakery extends BaseContract {
     }
   >;
 
+  getVoteAtIndex(
+    index: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  getVoteCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getVote_(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<Cakery_Entities.VoteStructStructOutput>;
+
   getVotes(
     proposalKey: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string[]>;
 
+  getVotesCount(
+    proposalKey: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<
+    [number, number, number] & {
+      votes: number;
+      votesFor: number;
+      votesRequired: number;
+    }
+  >;
+
   getVotesOfProposalData(
     proposalKey: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<Cakery_Entities.VoteStructStructOutput[]>;
+
+  getVotesRequired(
+    orgKey: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  memberAdd(
+    orgKey: PromiseOrValue<BytesLike>,
+    memberKey: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  memberApproved(
+    orgKey: PromiseOrValue<BytesLike>,
+    memberKey: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  memberApprovedExists(
+    orgKey: PromiseOrValue<BytesLike>,
+    memberKey: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  memberExists(
+    orgKey: PromiseOrValue<BytesLike>,
+    memberKey: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  newMember(
+    key: PromiseOrValue<BytesLike>,
+    name: PromiseOrValue<string>,
+    delux: PromiseOrValue<boolean>,
+    price: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  newOrg(
+    key: PromiseOrValue<BytesLike>,
+    name: PromiseOrValue<string>,
+    ref: PromiseOrValue<string>,
+    memberKey: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  newProposal(
+    key: PromiseOrValue<BytesLike>,
+    orgKey: PromiseOrValue<BytesLike>,
+    memberKey: PromiseOrValue<BytesLike>,
+    name: PromiseOrValue<string>,
+    uuid: PromiseOrValue<string>,
+    doc_cid: PromiseOrValue<string>,
+    ref_id: PromiseOrValue<string>,
+    total: PromiseOrValue<BigNumberish>,
+    votesRequired: PromiseOrValue<BigNumberish>,
+    proposalType: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  newVote(
+    key: PromiseOrValue<BytesLike>,
+    proposalKey: PromiseOrValue<BytesLike>,
+    memberKey: PromiseOrValue<BytesLike>,
+    voteFor: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  proposalAdd(
+    orgKey: PromiseOrValue<BytesLike>,
+    proposalKey: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  remMember(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  remOrg(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  remProposal(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setVotesRequired(
+    orgKey: PromiseOrValue<BytesLike>,
+    votesRequired: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   simpleAddMe(
     orgKey: PromiseOrValue<BytesLike>,
@@ -547,7 +1600,38 @@ export interface Cakery extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  updateMember(
+    key: PromiseOrValue<BytesLike>,
+    name: PromiseOrValue<string>,
+    delux: PromiseOrValue<boolean>,
+    price: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  updateOrg(
+    key: PromiseOrValue<BytesLike>,
+    name: PromiseOrValue<string>,
+    ref: PromiseOrValue<string>,
+    memberKey: PromiseOrValue<BytesLike>,
+    nMembers: PromiseOrValue<BigNumberish>,
+    voteForRequired: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  voteAdd(
+    voteKey: PromiseOrValue<BytesLike>,
+    proposalKey: PromiseOrValue<BytesLike>,
+    memberKey: PromiseOrValue<BytesLike>,
+    voteFor: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
+    addressToBytes32(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     castVote(
       orgKey: PromiseOrValue<BytesLike>,
       voteKey: PromiseOrValue<BytesLike>,
@@ -584,10 +1668,48 @@ export interface Cakery extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    existsMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    existsOrg(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    existsProposal(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    existsVote(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     getApprovedMembersOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string[]>;
+
+    getMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, boolean, BigNumber] & {
+        name: string;
+        delux: boolean;
+        price: BigNumber;
+      }
+    >;
+
+    getMemberAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    getMemberCount(overrides?: CallOverrides): Promise<BigNumber>;
 
     getMembersOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
@@ -603,6 +1725,41 @@ export interface Cakery extends BaseContract {
         ref: string;
         memberKey: string;
         members: number;
+        voteForRequired: number;
+      }
+    >;
+
+    getOrgApprovedMembers(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string[]>;
+
+    getOrgAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    getOrgCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getOrgMembers(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string[]>;
+
+    getOrgProposals(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string[]>;
+
+    getOrg_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, number, number] & {
+        name: string;
+        ref: string;
+        memberKey: string;
+        nMembers: number;
         voteForRequired: number;
       }
     >;
@@ -636,6 +1793,23 @@ export interface Cakery extends BaseContract {
       }
     >;
 
+    getProposalAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    getProposalCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getProposalVotes(
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string[]>;
+
+    getProposal_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<Cakery_Entities.ProposalReturnStructOutput>;
+
     getProposalsOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -657,16 +1831,133 @@ export interface Cakery extends BaseContract {
       }
     >;
 
+    getVoteAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    getVoteCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getVote_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<Cakery_Entities.VoteStructStructOutput>;
+
     getVotes(
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string[]>;
+
+    getVotesCount(
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [number, number, number] & {
+        votes: number;
+        votesFor: number;
+        votesRequired: number;
+      }
+    >;
 
     getVotesOfProposalData(
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<Cakery_Entities.VoteStructStructOutput[]>;
 
+    getVotesRequired(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    memberAdd(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    memberApproved(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    memberApprovedExists(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    memberExists(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    newMember(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      delux: PromiseOrValue<boolean>,
+      price: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    newOrg(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      ref: PromiseOrValue<string>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    newProposal(
+      key: PromiseOrValue<BytesLike>,
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      uuid: PromiseOrValue<string>,
+      doc_cid: PromiseOrValue<string>,
+      ref_id: PromiseOrValue<string>,
+      total: PromiseOrValue<BigNumberish>,
+      votesRequired: PromiseOrValue<BigNumberish>,
+      proposalType: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    newVote(
+      key: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      voteFor: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    proposalAdd(
+      orgKey: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    remMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    remOrg(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    remProposal(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setVotesRequired(
+      orgKey: PromiseOrValue<BytesLike>,
+      votesRequired: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     simpleAddMe(
       orgKey: PromiseOrValue<BytesLike>,
       memberName: PromiseOrValue<string>,
@@ -679,11 +1970,199 @@ export interface Cakery extends BaseContract {
       memberName: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    updateMember(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      delux: PromiseOrValue<boolean>,
+      price: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    updateOrg(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      ref: PromiseOrValue<string>,
+      memberKey: PromiseOrValue<BytesLike>,
+      nMembers: PromiseOrValue<BigNumberish>,
+      voteForRequired: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    voteAdd(
+      voteKey: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      voteFor: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[number, BigNumber] & { action: number; value: BigNumber }>;
   };
 
-  filters: {};
+  filters: {
+    "LogNewMember(address,bytes32,string,bool,uint256)"(
+      sender?: null,
+      key?: null,
+      name?: null,
+      delux?: null,
+      price?: null
+    ): LogNewMemberEventFilter;
+    LogNewMember(
+      sender?: null,
+      key?: null,
+      name?: null,
+      delux?: null,
+      price?: null
+    ): LogNewMemberEventFilter;
+
+    "LogNewOrg(address,bytes32,string,string,bytes32,uint16,uint16)"(
+      sender?: null,
+      key?: null,
+      name?: null,
+      ref?: null,
+      memberKey?: null,
+      members?: null,
+      voteForRequired?: null
+    ): LogNewOrgEventFilter;
+    LogNewOrg(
+      sender?: null,
+      key?: null,
+      name?: null,
+      ref?: null,
+      memberKey?: null,
+      members?: null,
+      voteForRequired?: null
+    ): LogNewOrgEventFilter;
+
+    "LogNewProposal(address,bytes32,string,string,string,string,uint256,uint16,uint16,uint16,uint8)"(
+      sender?: null,
+      key?: null,
+      name?: null,
+      uuid?: null,
+      doc_cid?: null,
+      ref_id?: null,
+      total?: null,
+      nVotes?: null,
+      nVotesFor?: null,
+      nVotesRequired?: null,
+      proposalType?: null
+    ): LogNewProposalEventFilter;
+    LogNewProposal(
+      sender?: null,
+      key?: null,
+      name?: null,
+      uuid?: null,
+      doc_cid?: null,
+      ref_id?: null,
+      total?: null,
+      nVotes?: null,
+      nVotesFor?: null,
+      nVotesRequired?: null,
+      proposalType?: null
+    ): LogNewProposalEventFilter;
+
+    "LogNewVote(address,bytes32,bool)"(
+      sender?: null,
+      proposalKey?: null,
+      voteFor?: null
+    ): LogNewVoteEventFilter;
+    LogNewVote(
+      sender?: null,
+      proposalKey?: null,
+      voteFor?: null
+    ): LogNewVoteEventFilter;
+
+    "LogRemMember(address,bytes32)"(
+      sender?: null,
+      key?: null
+    ): LogRemMemberEventFilter;
+    LogRemMember(sender?: null, key?: null): LogRemMemberEventFilter;
+
+    "LogRemOrg(address,bytes32)"(
+      sender?: null,
+      key?: null
+    ): LogRemOrgEventFilter;
+    LogRemOrg(sender?: null, key?: null): LogRemOrgEventFilter;
+
+    "LogRemProposal(address,bytes32)"(
+      sender?: null,
+      key?: null
+    ): LogRemProposalEventFilter;
+    LogRemProposal(sender?: null, key?: null): LogRemProposalEventFilter;
+
+    "LogUpdateMember(address,bytes32,string,bool,uint256)"(
+      sender?: null,
+      key?: null,
+      name?: null,
+      delux?: null,
+      price?: null
+    ): LogUpdateMemberEventFilter;
+    LogUpdateMember(
+      sender?: null,
+      key?: null,
+      name?: null,
+      delux?: null,
+      price?: null
+    ): LogUpdateMemberEventFilter;
+
+    "LogUpdateOrg(address,bytes32,string,string,bytes32,uint16,uint16,uint32,uint16)"(
+      sender?: null,
+      key?: null,
+      name?: null,
+      ref?: null,
+      memberKey?: null,
+      members?: null,
+      membersApproved?: null,
+      proposals?: null,
+      voteForRequired?: null
+    ): LogUpdateOrgEventFilter;
+    LogUpdateOrg(
+      sender?: null,
+      key?: null,
+      name?: null,
+      ref?: null,
+      memberKey?: null,
+      members?: null,
+      membersApproved?: null,
+      proposals?: null,
+      voteForRequired?: null
+    ): LogUpdateOrgEventFilter;
+
+    "LogUpdateProposal(address,bytes32,string,string,string,string,uint256,uint16,uint16,uint16,uint8,uint8)"(
+      sender?: null,
+      key?: null,
+      name?: null,
+      uuid?: null,
+      doc_cid?: null,
+      ref_id?: null,
+      total?: null,
+      nVotes?: null,
+      nVotesFor?: null,
+      nVotesRequired?: null,
+      proposalType?: null,
+      decisionStatus?: null
+    ): LogUpdateProposalEventFilter;
+    LogUpdateProposal(
+      sender?: null,
+      key?: null,
+      name?: null,
+      uuid?: null,
+      doc_cid?: null,
+      ref_id?: null,
+      total?: null,
+      nVotes?: null,
+      nVotesFor?: null,
+      nVotesRequired?: null,
+      proposalType?: null,
+      decisionStatus?: null
+    ): LogUpdateProposalEventFilter;
+  };
 
   estimateGas: {
+    addressToBytes32(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     castVote(
       orgKey: PromiseOrValue<BytesLike>,
       voteKey: PromiseOrValue<BytesLike>,
@@ -720,10 +2199,42 @@ export interface Cakery extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    existsMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    existsOrg(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    existsProposal(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    existsVote(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getApprovedMembersOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    getMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getMemberAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getMemberCount(overrides?: CallOverrides): Promise<BigNumber>;
 
     getMembersOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
@@ -735,8 +2246,52 @@ export interface Cakery extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getOrgApprovedMembers(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getOrgAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getOrgCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getOrgMembers(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getOrgProposals(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getOrg_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getProposal(
       proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getProposalAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getProposalCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getProposalVotes(
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getProposal_(
+      key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -755,7 +2310,24 @@ export interface Cakery extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getVoteAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getVoteCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getVote_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getVotes(
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getVotesCount(
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -763,6 +2335,100 @@ export interface Cakery extends BaseContract {
     getVotesOfProposalData(
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getVotesRequired(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    memberAdd(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    memberApproved(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    memberApprovedExists(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    memberExists(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    newMember(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      delux: PromiseOrValue<boolean>,
+      price: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    newOrg(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      ref: PromiseOrValue<string>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    newProposal(
+      key: PromiseOrValue<BytesLike>,
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      uuid: PromiseOrValue<string>,
+      doc_cid: PromiseOrValue<string>,
+      ref_id: PromiseOrValue<string>,
+      total: PromiseOrValue<BigNumberish>,
+      votesRequired: PromiseOrValue<BigNumberish>,
+      proposalType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    newVote(
+      key: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      voteFor: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    proposalAdd(
+      orgKey: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    remMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    remOrg(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    remProposal(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setVotesRequired(
+      orgKey: PromiseOrValue<BytesLike>,
+      votesRequired: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     simpleAddMe(
@@ -775,11 +2441,42 @@ export interface Cakery extends BaseContract {
       orgKey: PromiseOrValue<BytesLike>,
       memberKey: PromiseOrValue<BytesLike>,
       memberName: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    updateMember(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      delux: PromiseOrValue<boolean>,
+      price: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    updateOrg(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      ref: PromiseOrValue<string>,
+      memberKey: PromiseOrValue<BytesLike>,
+      nMembers: PromiseOrValue<BigNumberish>,
+      voteForRequired: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    voteAdd(
+      voteKey: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      voteFor: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    addressToBytes32(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     castVote(
       orgKey: PromiseOrValue<BytesLike>,
       voteKey: PromiseOrValue<BytesLike>,
@@ -816,10 +2513,42 @@ export interface Cakery extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    existsMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    existsOrg(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    existsProposal(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    existsVote(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getApprovedMembersOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    getMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getMemberAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getMemberCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getMembersOfOrg(
       orgKey: PromiseOrValue<BytesLike>,
@@ -831,8 +2560,52 @@ export interface Cakery extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getOrgApprovedMembers(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getOrgAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getOrgCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getOrgMembers(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getOrgProposals(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getOrg_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getProposal(
       proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getProposalAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getProposalCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getProposalVotes(
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getProposal_(
+      key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -851,7 +2624,24 @@ export interface Cakery extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getVoteAtIndex(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getVoteCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getVote_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getVotes(
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getVotesCount(
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -859,6 +2649,100 @@ export interface Cakery extends BaseContract {
     getVotesOfProposalData(
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getVotesRequired(
+      orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    memberAdd(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    memberApproved(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    memberApprovedExists(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    memberExists(
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    newMember(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      delux: PromiseOrValue<boolean>,
+      price: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    newOrg(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      ref: PromiseOrValue<string>,
+      memberKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    newProposal(
+      key: PromiseOrValue<BytesLike>,
+      orgKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      uuid: PromiseOrValue<string>,
+      doc_cid: PromiseOrValue<string>,
+      ref_id: PromiseOrValue<string>,
+      total: PromiseOrValue<BigNumberish>,
+      votesRequired: PromiseOrValue<BigNumberish>,
+      proposalType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    newVote(
+      key: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      voteFor: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    proposalAdd(
+      orgKey: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    remMember(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    remOrg(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    remProposal(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setVotesRequired(
+      orgKey: PromiseOrValue<BytesLike>,
+      votesRequired: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     simpleAddMe(
@@ -871,6 +2755,32 @@ export interface Cakery extends BaseContract {
       orgKey: PromiseOrValue<BytesLike>,
       memberKey: PromiseOrValue<BytesLike>,
       memberName: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateMember(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      delux: PromiseOrValue<boolean>,
+      price: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateOrg(
+      key: PromiseOrValue<BytesLike>,
+      name: PromiseOrValue<string>,
+      ref: PromiseOrValue<string>,
+      memberKey: PromiseOrValue<BytesLike>,
+      nMembers: PromiseOrValue<BigNumberish>,
+      voteForRequired: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    voteAdd(
+      voteKey: PromiseOrValue<BytesLike>,
+      proposalKey: PromiseOrValue<BytesLike>,
+      memberKey: PromiseOrValue<BytesLike>,
+      voteFor: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

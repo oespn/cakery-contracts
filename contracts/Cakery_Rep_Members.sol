@@ -52,7 +52,7 @@ contract Cakery_Rep_Members {
         emit LogUpdateMember(msg.sender, key, name, delux, price);
     }
 
-    function exists(bytes32 key) public view returns (bool) {
+    function existsMember(bytes32 key) public view returns (bool) {
         return memberSet.exists(key);
     }
 

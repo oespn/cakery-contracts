@@ -192,7 +192,7 @@ contract Cakery_Rep_Proposals {
     //     emit LogUpdateProposal(msg.sender, key, name, ref, memberKey, nVotes, voteForRequired);
     // }
 
-    function exists(bytes32 key) public view returns (bool) {
+    function existsProposal(bytes32 key) public view returns (bool) {
         return proposalSet.exists(key);
     }
 
@@ -202,7 +202,7 @@ contract Cakery_Rep_Proposals {
         emit LogRemProposal(msg.sender, key);
     }
 
-    function getProposal(bytes32 key)
+    function getProposal_(bytes32 key)
         public
         view
         returns (

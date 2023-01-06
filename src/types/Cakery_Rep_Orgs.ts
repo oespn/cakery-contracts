@@ -31,13 +31,13 @@ import type {
 
 export interface Cakery_Rep_OrgsInterface extends utils.Interface {
   functions: {
-    "exists(bytes32)": FunctionFragment;
-    "getOrg(bytes32)": FunctionFragment;
+    "existsOrg(bytes32)": FunctionFragment;
     "getOrgApprovedMembers(bytes32)": FunctionFragment;
     "getOrgAtIndex(uint256)": FunctionFragment;
     "getOrgCount()": FunctionFragment;
     "getOrgMembers(bytes32)": FunctionFragment;
     "getOrgProposals(bytes32)": FunctionFragment;
+    "getOrg_(bytes32)": FunctionFragment;
     "getVotesRequired(bytes32)": FunctionFragment;
     "memberAdd(bytes32,bytes32)": FunctionFragment;
     "memberApproved(bytes32,bytes32)": FunctionFragment;
@@ -52,13 +52,13 @@ export interface Cakery_Rep_OrgsInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "exists"
-      | "getOrg"
+      | "existsOrg"
       | "getOrgApprovedMembers"
       | "getOrgAtIndex"
       | "getOrgCount"
       | "getOrgMembers"
       | "getOrgProposals"
+      | "getOrg_"
       | "getVotesRequired"
       | "memberAdd"
       | "memberApproved"
@@ -72,11 +72,7 @@ export interface Cakery_Rep_OrgsInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "exists",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getOrg",
+    functionFragment: "existsOrg",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -97,6 +93,10 @@ export interface Cakery_Rep_OrgsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getOrgProposals",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getOrg_",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -152,8 +152,7 @@ export interface Cakery_Rep_OrgsInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "exists", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getOrg", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "existsOrg", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getOrgApprovedMembers",
     data: BytesLike
@@ -174,6 +173,7 @@ export interface Cakery_Rep_OrgsInterface extends utils.Interface {
     functionFragment: "getOrgProposals",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getOrg_", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getVotesRequired",
     data: BytesLike
@@ -283,23 +283,10 @@ export interface Cakery_Rep_Orgs extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    exists(
+    existsOrg(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
-
-    getOrg(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, string, number, number] & {
-        name: string;
-        ref: string;
-        memberKey: string;
-        nMembers: number;
-        voteForRequired: number;
-      }
-    >;
 
     getOrgApprovedMembers(
       orgKey: PromiseOrValue<BytesLike>,
@@ -324,6 +311,19 @@ export interface Cakery_Rep_Orgs extends BaseContract {
       orgKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string[]] & { array: string[] }>;
+
+    getOrg_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, number, number] & {
+        name: string;
+        ref: string;
+        memberKey: string;
+        nMembers: number;
+        voteForRequired: number;
+      }
+    >;
 
     getVotesRequired(
       orgKey: PromiseOrValue<BytesLike>,
@@ -390,23 +390,10 @@ export interface Cakery_Rep_Orgs extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  exists(
+  existsOrg(
     key: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
-
-  getOrg(
-    key: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<
-    [string, string, string, number, number] & {
-      name: string;
-      ref: string;
-      memberKey: string;
-      nMembers: number;
-      voteForRequired: number;
-    }
-  >;
 
   getOrgApprovedMembers(
     orgKey: PromiseOrValue<BytesLike>,
@@ -429,6 +416,19 @@ export interface Cakery_Rep_Orgs extends BaseContract {
     orgKey: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string[]>;
+
+  getOrg_(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, number, number] & {
+      name: string;
+      ref: string;
+      memberKey: string;
+      nMembers: number;
+      voteForRequired: number;
+    }
+  >;
 
   getVotesRequired(
     orgKey: PromiseOrValue<BytesLike>,
@@ -495,23 +495,10 @@ export interface Cakery_Rep_Orgs extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    exists(
+    existsOrg(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    getOrg(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, string, number, number] & {
-        name: string;
-        ref: string;
-        memberKey: string;
-        nMembers: number;
-        voteForRequired: number;
-      }
-    >;
 
     getOrgApprovedMembers(
       orgKey: PromiseOrValue<BytesLike>,
@@ -534,6 +521,19 @@ export interface Cakery_Rep_Orgs extends BaseContract {
       orgKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string[]>;
+
+    getOrg_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, number, number] & {
+        name: string;
+        ref: string;
+        memberKey: string;
+        nMembers: number;
+        voteForRequired: number;
+      }
+    >;
 
     getVotesRequired(
       orgKey: PromiseOrValue<BytesLike>,
@@ -651,12 +651,7 @@ export interface Cakery_Rep_Orgs extends BaseContract {
   };
 
   estimateGas: {
-    exists(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getOrg(
+    existsOrg(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -680,6 +675,11 @@ export interface Cakery_Rep_Orgs extends BaseContract {
 
     getOrgProposals(
       orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getOrg_(
+      key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -749,12 +749,7 @@ export interface Cakery_Rep_Orgs extends BaseContract {
   };
 
   populateTransaction: {
-    exists(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getOrg(
+    existsOrg(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -778,6 +773,11 @@ export interface Cakery_Rep_Orgs extends BaseContract {
 
     getOrgProposals(
       orgKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getOrg_(
+      key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

@@ -32,7 +32,7 @@ import type {
 export interface Cakery_Rep_MembersInterface extends utils.Interface {
   functions: {
     "addressToBytes32(address)": FunctionFragment;
-    "exists(bytes32)": FunctionFragment;
+    "existsMember(bytes32)": FunctionFragment;
     "getMember(bytes32)": FunctionFragment;
     "getMemberAtIndex(uint256)": FunctionFragment;
     "getMemberCount()": FunctionFragment;
@@ -44,7 +44,7 @@ export interface Cakery_Rep_MembersInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "addressToBytes32"
-      | "exists"
+      | "existsMember"
       | "getMember"
       | "getMemberAtIndex"
       | "getMemberCount"
@@ -58,7 +58,7 @@ export interface Cakery_Rep_MembersInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "exists",
+    functionFragment: "existsMember",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -100,7 +100,10 @@ export interface Cakery_Rep_MembersInterface extends utils.Interface {
     functionFragment: "addressToBytes32",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "exists", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "existsMember",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "getMember", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getMemberAtIndex",
@@ -199,7 +202,7 @@ export interface Cakery_Rep_Members extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string] & { key: string }>;
 
-    exists(
+    existsMember(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
@@ -251,7 +254,7 @@ export interface Cakery_Rep_Members extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  exists(
+  existsMember(
     key: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
@@ -301,7 +304,7 @@ export interface Cakery_Rep_Members extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    exists(
+    existsMember(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -390,7 +393,7 @@ export interface Cakery_Rep_Members extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    exists(
+    existsMember(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -435,7 +438,7 @@ export interface Cakery_Rep_Members extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    exists(
+    existsMember(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

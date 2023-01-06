@@ -50,7 +50,7 @@ contract Cakery_Rep_Votes {
     //     emit LogUpdateVote(msg.sender, key, name, delux, price);
     // }
 
-    function exists(bytes32 key) public view returns (bool) {
+    function existsVote(bytes32 key) public view returns (bool) {
         return voteSet.exists(key);
     }
 
@@ -60,7 +60,7 @@ contract Cakery_Rep_Votes {
     //     emit LogRemVote(msg.sender, key);
     // }
 
-    function getVote(bytes32 key) public view returns (Cakery_Entities.VoteStruct memory) // returns (
+    function getVote_(bytes32 key) public view returns (Cakery_Entities.VoteStruct memory) // returns (
     //     bytes32 proposalKey,
     //     bytes32 memberKey,
     //     bool voteFor

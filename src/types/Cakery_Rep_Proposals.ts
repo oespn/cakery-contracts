@@ -73,11 +73,11 @@ export declare namespace Cakery_Entities {
 
 export interface Cakery_Rep_ProposalsInterface extends utils.Interface {
   functions: {
-    "exists(bytes32)": FunctionFragment;
-    "getProposal(bytes32)": FunctionFragment;
+    "existsProposal(bytes32)": FunctionFragment;
     "getProposalAtIndex(uint256)": FunctionFragment;
     "getProposalCount()": FunctionFragment;
     "getProposalVotes(bytes32)": FunctionFragment;
+    "getProposal_(bytes32)": FunctionFragment;
     "getVotesCount(bytes32)": FunctionFragment;
     "newProposal(bytes32,bytes32,bytes32,string,string,string,string,uint256,uint16,uint8)": FunctionFragment;
     "remProposal(bytes32)": FunctionFragment;
@@ -86,11 +86,11 @@ export interface Cakery_Rep_ProposalsInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "exists"
-      | "getProposal"
+      | "existsProposal"
       | "getProposalAtIndex"
       | "getProposalCount"
       | "getProposalVotes"
+      | "getProposal_"
       | "getVotesCount"
       | "newProposal"
       | "remProposal"
@@ -98,11 +98,7 @@ export interface Cakery_Rep_ProposalsInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "exists",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getProposal",
+    functionFragment: "existsProposal",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -115,6 +111,10 @@ export interface Cakery_Rep_ProposalsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getProposalVotes",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getProposal_",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -150,9 +150,8 @@ export interface Cakery_Rep_ProposalsInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "exists", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getProposal",
+    functionFragment: "existsProposal",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -165,6 +164,10 @@ export interface Cakery_Rep_ProposalsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getProposalVotes",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getProposal_",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -297,19 +300,10 @@ export interface Cakery_Rep_Proposals extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    exists(
+    existsProposal(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
-
-    getProposal(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<
-      [Cakery_Entities.ProposalReturnStructOutput] & {
-        r: Cakery_Entities.ProposalReturnStructOutput;
-      }
-    >;
 
     getProposalAtIndex(
       index: PromiseOrValue<BigNumberish>,
@@ -324,6 +318,15 @@ export interface Cakery_Rep_Proposals extends BaseContract {
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string[]] & { array: string[] }>;
+
+    getProposal_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [Cakery_Entities.ProposalReturnStructOutput] & {
+        r: Cakery_Entities.ProposalReturnStructOutput;
+      }
+    >;
 
     getVotesCount(
       proposalKey: PromiseOrValue<BytesLike>,
@@ -364,15 +367,10 @@ export interface Cakery_Rep_Proposals extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  exists(
+  existsProposal(
     key: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
-
-  getProposal(
-    key: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<Cakery_Entities.ProposalReturnStructOutput>;
 
   getProposalAtIndex(
     index: PromiseOrValue<BigNumberish>,
@@ -385,6 +383,11 @@ export interface Cakery_Rep_Proposals extends BaseContract {
     proposalKey: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string[]>;
+
+  getProposal_(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<Cakery_Entities.ProposalReturnStructOutput>;
 
   getVotesCount(
     proposalKey: PromiseOrValue<BytesLike>,
@@ -425,15 +428,10 @@ export interface Cakery_Rep_Proposals extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    exists(
+    existsProposal(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    getProposal(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<Cakery_Entities.ProposalReturnStructOutput>;
 
     getProposalAtIndex(
       index: PromiseOrValue<BigNumberish>,
@@ -446,6 +444,11 @@ export interface Cakery_Rep_Proposals extends BaseContract {
       proposalKey: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string[]>;
+
+    getProposal_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<Cakery_Entities.ProposalReturnStructOutput>;
 
     getVotesCount(
       proposalKey: PromiseOrValue<BytesLike>,
@@ -551,12 +554,7 @@ export interface Cakery_Rep_Proposals extends BaseContract {
   };
 
   estimateGas: {
-    exists(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getProposal(
+    existsProposal(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -570,6 +568,11 @@ export interface Cakery_Rep_Proposals extends BaseContract {
 
     getProposalVotes(
       proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getProposal_(
+      key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -607,12 +610,7 @@ export interface Cakery_Rep_Proposals extends BaseContract {
   };
 
   populateTransaction: {
-    exists(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getProposal(
+    existsProposal(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -626,6 +624,11 @@ export interface Cakery_Rep_Proposals extends BaseContract {
 
     getProposalVotes(
       proposalKey: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getProposal_(
+      key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

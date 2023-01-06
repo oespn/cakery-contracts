@@ -45,28 +45,24 @@ export declare namespace Cakery_Entities {
 
 export interface Cakery_Rep_VotesInterface extends utils.Interface {
   functions: {
-    "exists(bytes32)": FunctionFragment;
-    "getVote(bytes32)": FunctionFragment;
+    "existsVote(bytes32)": FunctionFragment;
     "getVoteAtIndex(uint256)": FunctionFragment;
     "getVoteCount()": FunctionFragment;
+    "getVote_(bytes32)": FunctionFragment;
     "newVote(bytes32,bytes32,bytes32,bool)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "exists"
-      | "getVote"
+      | "existsVote"
       | "getVoteAtIndex"
       | "getVoteCount"
+      | "getVote_"
       | "newVote"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "exists",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getVote",
+    functionFragment: "existsVote",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -78,6 +74,10 @@ export interface Cakery_Rep_VotesInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "getVote_",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "newVote",
     values: [
       PromiseOrValue<BytesLike>,
@@ -87,8 +87,7 @@ export interface Cakery_Rep_VotesInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "exists", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getVote", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "existsVote", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getVoteAtIndex",
     data: BytesLike
@@ -97,6 +96,7 @@ export interface Cakery_Rep_VotesInterface extends utils.Interface {
     functionFragment: "getVoteCount",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getVote_", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "newVote", data: BytesLike): Result;
 
   events: {
@@ -145,15 +145,10 @@ export interface Cakery_Rep_Votes extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    exists(
+    existsVote(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
-
-    getVote(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[Cakery_Entities.VoteStructStructOutput]>;
 
     getVoteAtIndex(
       index: PromiseOrValue<BigNumberish>,
@@ -164,6 +159,11 @@ export interface Cakery_Rep_Votes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { count: BigNumber }>;
 
+    getVote_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[Cakery_Entities.VoteStructStructOutput]>;
+
     newVote(
       key: PromiseOrValue<BytesLike>,
       proposalKey: PromiseOrValue<BytesLike>,
@@ -173,15 +173,10 @@ export interface Cakery_Rep_Votes extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  exists(
+  existsVote(
     key: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
-
-  getVote(
-    key: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<Cakery_Entities.VoteStructStructOutput>;
 
   getVoteAtIndex(
     index: PromiseOrValue<BigNumberish>,
@@ -189,6 +184,11 @@ export interface Cakery_Rep_Votes extends BaseContract {
   ): Promise<string>;
 
   getVoteCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getVote_(
+    key: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<Cakery_Entities.VoteStructStructOutput>;
 
   newVote(
     key: PromiseOrValue<BytesLike>,
@@ -199,15 +199,10 @@ export interface Cakery_Rep_Votes extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    exists(
+    existsVote(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    getVote(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<Cakery_Entities.VoteStructStructOutput>;
 
     getVoteAtIndex(
       index: PromiseOrValue<BigNumberish>,
@@ -215,6 +210,11 @@ export interface Cakery_Rep_Votes extends BaseContract {
     ): Promise<string>;
 
     getVoteCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getVote_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<Cakery_Entities.VoteStructStructOutput>;
 
     newVote(
       key: PromiseOrValue<BytesLike>,
@@ -239,12 +239,7 @@ export interface Cakery_Rep_Votes extends BaseContract {
   };
 
   estimateGas: {
-    exists(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getVote(
+    existsVote(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -256,6 +251,11 @@ export interface Cakery_Rep_Votes extends BaseContract {
 
     getVoteCount(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getVote_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     newVote(
       key: PromiseOrValue<BytesLike>,
       proposalKey: PromiseOrValue<BytesLike>,
@@ -266,12 +266,7 @@ export interface Cakery_Rep_Votes extends BaseContract {
   };
 
   populateTransaction: {
-    exists(
-      key: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getVote(
+    existsVote(
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -282,6 +277,11 @@ export interface Cakery_Rep_Votes extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getVoteCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getVote_(
+      key: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     newVote(
       key: PromiseOrValue<BytesLike>,

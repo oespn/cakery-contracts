@@ -36,6 +36,7 @@ const chainIds = {
   rinkeby: 4,
   aurora: 1313161554,
   aurorat: 1313161555,
+  "aurorat-infura": 0x4e454153
 
 };
 
@@ -56,9 +57,13 @@ function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
       break;
     case "aurorat":
       jsonRpcUrl = "https://testnet.aurora.dev";
+      //jsonRpcUrl = `https://aurora-testnet.infura.io/v3/' + infuraApiKey; // ${process.env.INFURA_API_KEY}`
       break;
     case "aurora":
       jsonRpcUrl = "https://mainnet.aurora.dev";
+      break;
+    case "aurorat-infura":
+      jsonRpcUrl = 'https://aurora-testnet.infura.io/v3/5750b2d015a948948503a4c66611a13c';
       break;
     // case "polygon-mumbai":
     //   jsonRpcUrl = "https://api.polygonscan.com/api";
@@ -114,6 +119,7 @@ const config: HardhatUserConfig = {
     rinkeby: getChainConfig("rinkeby"),
     aurorat: getChainConfig("aurorat"),
     aurora: getChainConfig("aurora"),
+    "aurorat-infura": getChainConfig("aurorat-infura"),
   },
   paths: {
     artifacts: "./artifacts",

@@ -11,7 +11,7 @@ import "./Cakery_Rep_Proposals.sol";
 import "./Cakery_Rep_Votes.sol";
 // import "./Cakery_Rep_Potents.sol";
 
-contract Cakery {
+contract Cakery is Cakery_Rep_Orgs, Cakery_Rep_Members, Cakery_Rep_Proposals, Cakery_Rep_Votes, Cakery_Entities {
     Cakery_Rep_Orgs _org = new Cakery_Rep_Orgs();
     Cakery_Rep_Members _member = new Cakery_Rep_Members();
 
@@ -35,7 +35,7 @@ contract Cakery {
 
         _org.newOrg(orgKey, orgName, orgRef, memberKey);
         // check if repository has this member (separate from org.members)
-        if (!_member.exists(memberKey)) {
+        if (!_member.existsMember(memberKey)) {
             _member.newMember(memberKey, memberName, false, 20);
             // org.memberAdd(orgKey, memberKey); <-- note: called internally
         }
@@ -53,7 +53,7 @@ contract Cakery {
     ) public {
 
         //require(!_member.exists(memberKey), "Can't add new member when already exists.");
-        if (!_member.exists(memberKey))
+        if (!_member.existsMember(memberKey))
         {
             _member.newMember(memberKey, memberName, false, 1);
         }
@@ -62,7 +62,7 @@ contract Cakery {
         // proposal to join the org
         bytes32 proposalHash = keccak256(abi.encodePacked(orgKey, memberKey));
 
-        if (!_proposal.exists(proposalHash))
+        if (!_proposal.existsProposal(proposalHash))
         {
             // new members need approval.  Create the proposal for voting.
             //bytes32 proposalKey = proposalHash;
@@ -98,7 +98,7 @@ contract Cakery {
             uint16 voteForRequired
         )
     {
-        return _org.getOrg(orgKey);
+        return _org.getOrg_(orgKey);
     }
 
     function getMembersOfOrg(bytes32 orgKey) public view returns (bytes32[] memory array) {
@@ -131,7 +131,7 @@ contract Cakery {
             Cakery_Entities.DecisionStatus decision
         )
     {
-        Cakery_Entities.ProposalReturn memory r = _proposal.getProposal(proposalKey);
+        Cakery_Entities.ProposalReturn memory r = _proposal.getProposal_(proposalKey);
 
         return (
             r.orgKey,
@@ -204,7 +204,7 @@ contract Cakery {
         bytes32[] memory array = _org.getOrgProposals(orgKey);
         Cakery_Entities.ProposalReturn[] memory pData = new Cakery_Entities.ProposalReturn[](array.length);
         for (uint16 i = 0; i < array.length; i++) {
-            pData[i] = _proposal.getProposal(array[i]);
+            pData[i] = _proposal.getProposal_(array[i]);
             pData[i].proposalKey = array[i];
         }
         return pData;
@@ -218,7 +218,7 @@ contract Cakery {
 
         for (uint16 i = 0; i < array.length; i++) {
             //bytes32 voteKey = _proposal.getProposalVoteByMember(proposalKey, array[i]);
-            pData[i] = _vote.getVote(array[i]); //needs to be VoteKey (not member)
+            pData[i] = _vote.getVote_(array[i]); //needs to be VoteKey (not member)
         }
         return pData;
     }
@@ -236,7 +236,7 @@ contract Cakery {
             bool voteFor
         )
     {
-        Cakery_Entities.VoteStruct memory r = _vote.getVote(voteKey);
+        Cakery_Entities.VoteStruct memory r = _vote.getVote_(voteKey);
 
         return (r.proposalKey, r.memberKey, r.voteFor);
     }
@@ -256,7 +256,7 @@ contract Cakery {
         uint16 votesRequired = _org.getVotesRequired(orgKey);
 
         // check if repository has this Proposal (separate from org.poposals)
-        if (!_proposal.exists(proposalKey)) {
+        if (!_proposal.existsProposal(proposalKey)) {
             _proposal.newProposal(
                 proposalKey,
                 orgKey,
@@ -299,7 +299,7 @@ contract Cakery {
         require(_org.memberApprovedExists(orgKey, memberKey), "Member must be Approved in the Org to Vote");
 
         // check if repository has this Proposal (separate from org.poposals)
-        if (_proposal.exists(proposalKey)) {
+        if (_proposal.existsProposal(proposalKey)) {
             Cakery_Entities.ProposalType action;
             uint256 newVal = 0;
 
@@ -312,7 +312,7 @@ contract Cakery {
 
             if (action == Cakery_Entities.ProposalType.NEW_MEMBER) // 'updateMemberAsApproved'
             {
-                Cakery_Entities.ProposalReturn memory p = _proposal.getProposal(proposalKey);
+                Cakery_Entities.ProposalReturn memory p = _proposal.getProposal_(proposalKey);
                 bytes32 approveMember = p.memberKey;
                 _org.memberApproved(orgKey, approveMember);
             } else if (action == Cakery_Entities.ProposalType.ORG_RULES) // 'updateMemberVoteRules'

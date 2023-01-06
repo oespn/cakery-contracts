@@ -76,10 +76,13 @@
     "coverage": "hardhat coverage --solcoverjs ./.solcover.js --temp artifacts --testfiles \"test/**/*.ts\" && yarn typechain",
     "deploy-greeter": "hardhat deploy:Greeter --greeting \"Hola\" ",
     "deploy-cakery": "hardhat deploy:Cakery --network aurorat",
+    "deploy-infura": "hardhat deploy:Cakery --network aurorat-infura",
+    "deploy-mumbai": "hardhat deploy:Cakery --network polygon-mumbai",
     "deploy-cakery-hh": "hardhat deploy:Cakery --network hardhat",
     "typechain": "hardhat typechain",
     "deploy:network": "hardhat run scripts/deploy.ts --network",
     "deploy:aurorat": "hardhat deploy:Greeter --network aurorat",
+
     "lint": "yarn lint:sol && yarn lint:ts && yarn prettier:check",
     "lint:sol": "solhint --config ./.solhint.json --max-warnings 0 \"contracts/**/*.sol\"",
     "lint:ts": "eslint --config ./.eslintrc.yaml --ignore-path ./.eslintignore --ext .js,.ts .",

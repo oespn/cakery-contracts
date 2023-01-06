@@ -228,7 +228,7 @@ contract Cakery_Rep_Orgs {
         );
     }
 
-    function exists(bytes32 key) public view returns (bool) {
+    function existsOrg(bytes32 key) public view returns (bool) {
         return orgSet.exists(key);
     }
 
@@ -238,7 +238,7 @@ contract Cakery_Rep_Orgs {
         emit LogRemOrg(msg.sender, key);
     }
 
-    function getOrg(bytes32 key)
+    function getOrg_(bytes32 key)
         public
         view
         returns (

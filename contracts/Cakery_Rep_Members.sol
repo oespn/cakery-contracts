@@ -76,11 +76,11 @@ contract Cakery_Rep_Members {
         return (w.name, w.delux, w.price);
     }
 
-    function getMemberCount() public view returns (uint256 count) {
+    function getMemberCount() internal view returns (uint256 count) {
         return memberSet.count();
     }
 
-    function getMemberAtIndex(uint256 index) public view returns (bytes32 key) {
+    function getMemberAtIndex(uint256 index) internal view returns (bytes32 key) {
         return memberSet.keyAtIndex(index);
     }
 }

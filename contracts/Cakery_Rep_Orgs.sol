@@ -228,17 +228,17 @@ contract Cakery_Rep_Orgs {
         );
     }
 
-    function existsOrg(bytes32 key) public view returns (bool) {
+    function existsOrg(bytes32 key) internal view returns (bool) {
         return orgSet.exists(key);
     }
 
-    function remOrg(bytes32 key) public {
+    function remOrg(bytes32 key) internal {
         orgSet.remove(key); // Note that this will fail automatically if the key doesn't exist
         delete orgs[key];
         emit LogRemOrg(msg.sender, key);
     }
 
-    function getOrg_(bytes32 key)
+    function _getOrg(bytes32 key)
         public
         view
         returns (
@@ -254,11 +254,11 @@ contract Cakery_Rep_Orgs {
         return (w.name, w.ref, w.memberKey, w.nMembers, w.voteForRequired);
     }
 
-    function getOrgCount() public view returns (uint256 count) {
+    function getOrgCount() internal view returns (uint256 count) {
         return orgSet.count();
     }
 
-    function getOrgAtIndex(uint256 index) public view returns (bytes32 key) {
+    function getOrgAtIndex(uint256 index) internal view returns (bytes32 key) {
         return orgSet.keyAtIndex(index);
     }
 }

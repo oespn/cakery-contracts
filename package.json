@@ -75,6 +75,8 @@
     "compile": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat compile",
     "coverage": "hardhat coverage --solcoverjs ./.solcover.js --temp artifacts --testfiles \"test/**/*.ts\" && yarn typechain",
     "deploy-greeter": "hardhat deploy:Greeter --greeting \"Hola\" ",
+    "deploy-cakery-celo": "hardhat deploy:Cakery --network celo",
+    "deploy-cakery-alfajores": "hardhat deploy:Cakery --network celo-alfajores",
     "deploy-cakery": "hardhat deploy:Cakery --network aurorat",
     "deploy-infura": "hardhat deploy:Cakery --network aurorat-infura",
     "deploy-mumbai": "hardhat deploy:Cakery --network polygon-mumbai",

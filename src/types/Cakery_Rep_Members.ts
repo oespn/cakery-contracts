@@ -34,8 +34,6 @@ export interface Cakery_Rep_MembersInterface extends utils.Interface {
     "addressToBytes32(address)": FunctionFragment;
     "existsMember(bytes32)": FunctionFragment;
     "getMember(bytes32)": FunctionFragment;
-    "getMemberAtIndex(uint256)": FunctionFragment;
-    "getMemberCount()": FunctionFragment;
     "newMember(bytes32,string,bool,uint256)": FunctionFragment;
     "remMember(bytes32)": FunctionFragment;
     "updateMember(bytes32,string,bool,uint256)": FunctionFragment;
@@ -46,8 +44,6 @@ export interface Cakery_Rep_MembersInterface extends utils.Interface {
       | "addressToBytes32"
       | "existsMember"
       | "getMember"
-      | "getMemberAtIndex"
-      | "getMemberCount"
       | "newMember"
       | "remMember"
       | "updateMember"
@@ -64,14 +60,6 @@ export interface Cakery_Rep_MembersInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getMember",
     values: [PromiseOrValue<BytesLike>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMemberAtIndex",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMemberCount",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "newMember",
@@ -105,14 +93,6 @@ export interface Cakery_Rep_MembersInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getMember", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getMemberAtIndex",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getMemberCount",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "newMember", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "remMember", data: BytesLike): Result;
   decodeFunctionResult(
@@ -218,15 +198,6 @@ export interface Cakery_Rep_Members extends BaseContract {
       }
     >;
 
-    getMemberAtIndex(
-      index: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string] & { key: string }>;
-
-    getMemberCount(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { count: BigNumber }>;
-
     newMember(
       key: PromiseOrValue<BytesLike>,
       name: PromiseOrValue<string>,
@@ -270,13 +241,6 @@ export interface Cakery_Rep_Members extends BaseContract {
     }
   >;
 
-  getMemberAtIndex(
-    index: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  getMemberCount(overrides?: CallOverrides): Promise<BigNumber>;
-
   newMember(
     key: PromiseOrValue<BytesLike>,
     name: PromiseOrValue<string>,
@@ -319,13 +283,6 @@ export interface Cakery_Rep_Members extends BaseContract {
         price: BigNumber;
       }
     >;
-
-    getMemberAtIndex(
-      index: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    getMemberCount(overrides?: CallOverrides): Promise<BigNumber>;
 
     newMember(
       key: PromiseOrValue<BytesLike>,
@@ -403,13 +360,6 @@ export interface Cakery_Rep_Members extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getMemberAtIndex(
-      index: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getMemberCount(overrides?: CallOverrides): Promise<BigNumber>;
-
     newMember(
       key: PromiseOrValue<BytesLike>,
       name: PromiseOrValue<string>,
@@ -447,13 +397,6 @@ export interface Cakery_Rep_Members extends BaseContract {
       key: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    getMemberAtIndex(
-      index: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getMemberCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     newMember(
       key: PromiseOrValue<BytesLike>,

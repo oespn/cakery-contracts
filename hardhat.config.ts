@@ -36,8 +36,10 @@ const chainIds = {
   rinkeby: 4,
   aurora: 1313161554,
   aurorat: 1313161555,
-  "aurorat-infura": 0x4e454153
+  "aurorat-infura": 0x4e454153,
 
+  celo: 42220,
+  "celo-alfajores": 44787
 };
 
 //  https://aurora.dev/start:
@@ -55,6 +57,12 @@ function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
     case "bsc":
       jsonRpcUrl = "https://bsc-dataseed1.binance.org";
       break;
+    case "celo":
+        jsonRpcUrl = "https://forno.celo.org";
+        break;
+    case "celo-alfajores":
+        jsonRpcUrl = "https://alfajores-forno.celo-testnet.org";
+        break;
     case "aurorat":
       jsonRpcUrl = "https://testnet.aurora.dev";
       //jsonRpcUrl = `https://aurora-testnet.infura.io/v3/' + infuraApiKey; // ${process.env.INFURA_API_KEY}`
@@ -71,6 +79,18 @@ function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
     default:
       jsonRpcUrl = "https://" + chain + ".infura.io/v3/" + infuraApiKey;
   }
+
+  //if (chain=="celo" || chain=="celo-alfajores")
+  // return {
+  //   accounts: {
+  //     count: 10,
+  //     mnemonic,
+  //     path: "m/44'/52752'/0'/0"
+  //   },
+  //   chainId: chainIds[chain],
+  //   url: jsonRpcUrl,
+  // }
+  // // else
   return {
     accounts: {
       count: 10,
@@ -117,6 +137,10 @@ const config: HardhatUserConfig = {
     "polygon-mainnet": getChainConfig("polygon-mainnet"),
     "polygon-mumbai": getChainConfig("polygon-mumbai"),
     rinkeby: getChainConfig("rinkeby"),
+
+    "celo-alfajores": getChainConfig("celo-alfajores"),
+    celo: getChainConfig("celo"),
+
     aurorat: getChainConfig("aurorat"),
     aurora: getChainConfig("aurora"),
     "aurorat-infura": getChainConfig("aurorat-infura"),

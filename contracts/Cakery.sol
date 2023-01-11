@@ -98,7 +98,7 @@ contract Cakery is Cakery_Rep_Orgs, Cakery_Rep_Members, Cakery_Rep_Proposals, Ca
             uint16 voteForRequired
         )
     {
-        return _org.getOrg_(orgKey);
+        return _org._getOrg(orgKey);
     }
 
     function getMembersOfOrg(bytes32 orgKey) public view returns (bytes32[] memory array) {
@@ -131,7 +131,7 @@ contract Cakery is Cakery_Rep_Orgs, Cakery_Rep_Members, Cakery_Rep_Proposals, Ca
             Cakery_Entities.DecisionStatus decision
         )
     {
-        Cakery_Entities.ProposalReturn memory r = _proposal.getProposal_(proposalKey);
+        Cakery_Entities.ProposalReturn memory r = _proposal._getProposal(proposalKey);
 
         return (
             r.orgKey,
@@ -204,7 +204,7 @@ contract Cakery is Cakery_Rep_Orgs, Cakery_Rep_Members, Cakery_Rep_Proposals, Ca
         bytes32[] memory array = _org.getOrgProposals(orgKey);
         Cakery_Entities.ProposalReturn[] memory pData = new Cakery_Entities.ProposalReturn[](array.length);
         for (uint16 i = 0; i < array.length; i++) {
-            pData[i] = _proposal.getProposal_(array[i]);
+            pData[i] = _proposal._getProposal(array[i]);
             pData[i].proposalKey = array[i];
         }
         return pData;
@@ -218,7 +218,7 @@ contract Cakery is Cakery_Rep_Orgs, Cakery_Rep_Members, Cakery_Rep_Proposals, Ca
 
         for (uint16 i = 0; i < array.length; i++) {
             //bytes32 voteKey = _proposal.getProposalVoteByMember(proposalKey, array[i]);
-            pData[i] = _vote.getVote_(array[i]); //needs to be VoteKey (not member)
+            pData[i] = _vote._getVote(array[i]); //needs to be VoteKey (not member)
         }
         return pData;
     }
@@ -236,7 +236,7 @@ contract Cakery is Cakery_Rep_Orgs, Cakery_Rep_Members, Cakery_Rep_Proposals, Ca
             bool voteFor
         )
     {
-        Cakery_Entities.VoteStruct memory r = _vote.getVote_(voteKey);
+        Cakery_Entities.VoteStruct memory r = _vote._getVote(voteKey);
 
         return (r.proposalKey, r.memberKey, r.voteFor);
     }
@@ -312,7 +312,7 @@ contract Cakery is Cakery_Rep_Orgs, Cakery_Rep_Members, Cakery_Rep_Proposals, Ca
 
             if (action == Cakery_Entities.ProposalType.NEW_MEMBER) // 'updateMemberAsApproved'
             {
-                Cakery_Entities.ProposalReturn memory p = _proposal.getProposal_(proposalKey);
+                Cakery_Entities.ProposalReturn memory p = _proposal._getProposal(proposalKey);
                 bytes32 approveMember = p.memberKey;
                 _org.memberApproved(orgKey, approveMember);
             } else if (action == Cakery_Entities.ProposalType.ORG_RULES) // 'updateMemberVoteRules'

@@ -60,7 +60,7 @@ contract Cakery_Rep_Votes {
     //     emit LogRemVote(msg.sender, key);
     // }
 
-    function getVote_(bytes32 key) public view returns (Cakery_Entities.VoteStruct memory) // returns (
+    function _getVote(bytes32 key) public view returns (Cakery_Entities.VoteStruct memory) // returns (
     //     bytes32 proposalKey,
     //     bytes32 memberKey,
     //     bool voteFor
@@ -72,11 +72,11 @@ contract Cakery_Rep_Votes {
         //(v.proposalKey, v.memberKey, v.voteFor);
     }
 
-    function getVoteCount() public view returns (uint256 count) {
+    function getVoteCount() internal view returns (uint256 count) {
         return voteSet.count();
     }
 
-    function getVoteAtIndex(uint256 index) public view returns (bytes32 key) {
+    function getVoteAtIndex(uint256 index) internal view returns (bytes32 key) {
         return voteSet.keyAtIndex(index);
     }
 }

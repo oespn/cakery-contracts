@@ -159,3 +159,8 @@ make your `ethers` package version match the version used by the `@ethereum-waff
 Cause is not enough funds.  This contract requires about ETH 0.003 balance to deploy.
 Success with: hardhat deploy:Cakery --network aurorat
 Cakery deployed to:  0x1175B8Fb85e5B545E3364055B5EfB5b239cf9FA6
+
+## Celo deployment:
+
+Now on Celo:
+https://explorer.celo.org/alfajores/address/0xc00F017c8a9E7a79fA1b9D007dE3ac1Da6fC9033

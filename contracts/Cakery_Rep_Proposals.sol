@@ -196,13 +196,13 @@ contract Cakery_Rep_Proposals {
         return proposalSet.exists(key);
     }
 
-    function remProposal(bytes32 key) public {
+    function remProposal(bytes32 key) internal {
         proposalSet.remove(key); // Note that this will fail automatically if the key doesn't exist
         delete proposals[key];
         emit LogRemProposal(msg.sender, key);
     }
 
-    function getProposal_(bytes32 key)
+    function _getProposal(bytes32 key)
         public
         view
         returns (
@@ -237,11 +237,11 @@ contract Cakery_Rep_Proposals {
         //(p.orgKey, p.memberKey, p.name, p.uuid, p.doc_cid, p.ref_id, p.total, p.nVotes, p.proposalType, p.decision);
     }
 
-    function getProposalCount() public view returns (uint256 count) {
+    function getProposalCount() internal view returns (uint256 count) {
         return proposalSet.count();
     }
 
-    function getProposalAtIndex(uint256 index) public view returns (bytes32 key) {
+    function getProposalAtIndex(uint256 index) internal view returns (bytes32 key) {
         return proposalSet.keyAtIndex(index);
     }
 }
